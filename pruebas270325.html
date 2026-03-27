@@ -1,0 +1,221 @@
+import React, { useState } from 'react';
+import { 
+  ShieldCheck, 
+  Cpu, 
+  Network, 
+  Database, 
+  Microscope, 
+  BrainCircuit, 
+  Layers, 
+  Globe, 
+  Lock, 
+  Binary,
+  ChevronRight,
+  Info
+} from 'lucide-react';
+
+const App = () => {
+  const [activeTrend, setActiveTrend] = useState(null);
+
+  const categories = [
+    {
+      id: 'arquitecto',
+      title: 'El Arquitecto',
+      description: 'Crea bases digitales seguras, escalables y adaptativas.',
+      color: 'bg-blue-600',
+      trends: [
+        {
+          id: 1,
+          name: 'Plataformas de desarrollo nativas de IA',
+          icon: <BrainCircuit className="w-6 h-6" />,
+          detail: 'Plataformas diseñadas desde cero para integrar IA en todo el ciclo de vida del desarrollo.',
+          benefit: 'Aceleración drástica del tiempo de comercialización y calidad del código.'
+        },
+        {
+          id: 2,
+          name: 'Supercomputación de IA',
+          icon: <Cpu className="w-6 h-6" />,
+          detail: 'Infraestructura de computación de alto rendimiento optimizada para entrenar modelos masivos.',
+          benefit: 'Capacidad para procesar datos complejos a escala sin precedentes.'
+        },
+        {
+          id: 3,
+          name: 'Computación confidencial',
+          icon: <Lock className="w-6 h-6" />,
+          detail: 'Protección de datos en uso mediante entornos de ejecución de confianza (TEE).',
+          benefit: 'Privacidad total en entornos de nube compartidos.'
+        }
+      ]
+    },
+    {
+      id: 'sintetizador',
+      title: 'El Sintetizador',
+      description: 'Orquesta tecnologías para encontrar nuevas fuentes de valor.',
+      color: 'bg-emerald-600',
+      trends: [
+        {
+          id: 4,
+          name: 'Sistemas multiagente (MAS)',
+          icon: <Network className="w-6 h-6" />,
+          detail: 'Sistemas donde múltiples agentes de IA colaboran para resolver problemas complejos.',
+          benefit: 'Autonomía operativa y resolución de problemas interdisciplinarios.'
+        },
+        {
+          id: 5,
+          name: 'Modelos de lenguaje específicos de dominio',
+          icon: <Database className="w-6 h-6" />,
+          detail: 'Modelos entrenados con datos industriales específicos para mayor precisión.',
+          benefit: 'Reducción de alucinaciones y mayor relevancia sectorial.'
+        },
+        {
+          id: 6,
+          name: 'IA Física (Robótica avanzada)',
+          icon: <Binary className="w-6 h-6" />,
+          detail: 'Integración de IA en sistemas físicos y robóticos para interacción con el mundo real.',
+          benefit: 'Automatización inteligente en logística, salud y manufactura.'
+        }
+      ]
+    },
+    {
+      id: 'vanguardista',
+      title: 'El Vanguardista',
+      description: 'Potencia la confianza, gobernanza y seguridad.',
+      color: 'bg-amber-600',
+      trends: [
+        {
+          id: 7,
+          name: 'Ciberseguridad preventiva',
+          icon: <ShieldCheck className="w-6 h-6" />,
+          detail: 'Sistemas que anticipan ataques antes de que ocurran mediante modelos predictivos.',
+          benefit: 'Resiliencia proactiva frente a amenazas emergentes.'
+        },
+        {
+          id: 8,
+          name: 'Procedencia Digital',
+          icon: <Layers className="w-6 h-6" />,
+          detail: 'Tecnologías para verificar el origen y la autenticidad del contenido digital.',
+          benefit: 'Combate a la desinformación y los deepfakes.'
+        },
+        {
+          id: 9,
+          name: 'Plataformas de seguridad de IA',
+          icon: <Microscope className="w-6 h-6" />,
+          detail: 'Marcos específicos para asegurar el ciclo de vida de los modelos de IA.',
+          benefit: 'Mitigación de riesgos de inyección de prompts y robo de modelos.'
+        },
+        {
+          id: 10,
+          name: 'Geopatriación',
+          icon: <Globe className="w-6 h-6" />,
+          detail: 'Estrategias para localizar datos y servicios según soberanía tecnológica regional.',
+          benefit: 'Cumplimiento normativo y reducción de dependencias geopolíticas.'
+        }
+      ]
+    }
+  ];
+
+  return (
+    <div className="min-h-screen bg-slate-50 p-4 md:p-8 font-sans text-slate-900">
+      <header className="max-w-6xl mx-auto mb-10 text-center">
+        <h1 className="text-3xl md:text-4xl font-bold text-slate-800 mb-4">
+          Principales Tendencias Tecnológicas 2026
+        </h1>
+        <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+          Basado en el informe estratégico de Gartner. Explore los pilares que definirán la innovación y la seguridad en el próximo año.
+        </p>
+      </header>
+
+      <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
+        {categories.map((cat) => (
+          <div key={cat.id} className="flex flex-col gap-4">
+            <div className={`${cat.color} text-white p-4 rounded-xl shadow-lg`}>
+              <h2 className="text-xl font-bold flex items-center gap-2">
+                <ChevronRight className="w-5 h-5" /> {cat.title}
+              </h2>
+              <p className="text-sm opacity-90 mt-1">{cat.description}</p>
+            </div>
+
+            <div className="flex flex-col gap-3">
+              {cat.trends.map((trend) => (
+                <button
+                  key={trend.id}
+                  onClick={() => setActiveTrend(activeTrend?.id === trend.id ? null : trend)}
+                  className={`p-4 rounded-lg border-2 transition-all text-left flex items-start gap-4 shadow-sm hover:shadow-md ${
+                    activeTrend?.id === trend.id 
+                    ? 'border-slate-800 bg-white scale-[1.02]' 
+                    : 'border-transparent bg-white hover:border-slate-300'
+                  }`}
+                >
+                  <div className={`p-2 rounded-lg ${cat.color} text-white`}>
+                    {trend.icon}
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-slate-800 leading-tight">
+                      {trend.name}
+                    </h3>
+                    <p className="text-xs text-slate-500 mt-1 uppercase font-bold tracking-wider">
+                      Tendencia #{trend.id}
+                    </p>
+                  </div>
+                </button>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Modal/Detail Panel */}
+      {activeTrend && (
+        <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full overflow-hidden animate-in fade-in zoom-in duration-200">
+            <div className="p-6">
+              <div className="flex justify-between items-start mb-4">
+                <div className="flex items-center gap-3">
+                  <div className="p-3 bg-slate-100 rounded-xl text-slate-800">
+                    {activeTrend.icon}
+                  </div>
+                  <h3 className="text-xl font-bold">{activeTrend.name}</h3>
+                </div>
+                <button 
+                  onClick={() => setActiveTrend(null)}
+                  className="text-slate-400 hover:text-slate-600 text-2xl font-light"
+                >
+                  &times;
+                </button>
+              </div>
+              
+              <div className="space-y-4">
+                <div className="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500">
+                  <h4 className="text-sm font-bold text-blue-800 flex items-center gap-2 mb-1">
+                    <Info className="w-4 h-4" /> Descripción
+                  </h4>
+                  <p className="text-slate-700">{activeTrend.detail}</p>
+                </div>
+
+                <div className="bg-emerald-50 p-4 rounded-lg border-l-4 border-emerald-500">
+                  <h4 className="text-sm font-bold text-emerald-800 flex items-center gap-2 mb-1">
+                    <Layers className="w-4 h-4" /> Beneficio Clave
+                  </h4>
+                  <p className="text-slate-700">{activeTrend.benefit}</p>
+                </div>
+              </div>
+
+              <button
+                onClick={() => setActiveTrend(null)}
+                className="w-full mt-6 py-3 bg-slate-800 text-white rounded-xl font-bold hover:bg-slate-700 transition-colors"
+              >
+                Cerrar Detalles
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <footer className="max-w-6xl mx-auto mt-12 pt-8 border-t border-slate-200 text-center text-slate-500 text-sm">
+        <p>© 2026 Resumen Ejecutivo - Basado en Reporte Gartner 2026</p>
+      </footer>
+    </div>
+  );
+};
+
+export default App;
